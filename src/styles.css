@@ -1,0 +1,249 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+
+  --color-brand-deep: var(--brand-deep);
+  --color-brand-sky: var(--brand-sky);
+  --color-brand-coral: var(--brand-coral);
+  --color-brand-orange: var(--brand-orange);
+
+  --font-display: "Sofia Sans", system-ui, sans-serif;
+  --font-body: "Sofia Sans", system-ui, sans-serif;
+  --font-sans: "Sofia Sans", system-ui, sans-serif;
+}
+
+:root {
+  --radius: 0.75rem;
+
+  --brand-deep: #004369;
+  --brand-sky: #57c2e5;
+  --brand-coral: #e94b2e;
+  --brand-orange: #f59a2d;
+
+  /* About section semantic tokens — dark brand theme */
+  --about-bg: var(--brand-deep);
+  --about-fg: #ffffff;
+  --about-border: color-mix(in srgb, white 18%, transparent);
+  --about-card-bg: color-mix(in srgb, white 8%, transparent);
+  --about-card-border: color-mix(in srgb, white 18%, transparent);
+  --about-divider: color-mix(in srgb, white 15%, transparent);
+
+  /* Audience section semantic tokens — light theme */
+  --audience-bg: #F4F8FC;
+  --audience-card-shadow:
+    0 1px 2px rgba(0, 67, 105, 0.06),
+    0 8px 20px -8px rgba(0, 67, 105, 0.12),
+    0 24px 48px -24px rgba(0, 67, 105, 0.18);
+
+
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.32 0.07 235);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.32 0.07 235);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.32 0.07 235);
+  --primary: oklch(0.62 0.18 35);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.96 0.01 230);
+  --secondary-foreground: oklch(0.32 0.07 235);
+  --muted: oklch(0.97 0.01 230);
+  --muted-foreground: oklch(0.5 0.04 235);
+  --accent: oklch(0.96 0.02 230);
+  --accent-foreground: oklch(0.32 0.07 235);
+  --destructive: oklch(0.6 0.22 27);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.92 0.01 230);
+  --input: oklch(0.92 0.01 230);
+  --ring: oklch(0.62 0.18 35);
+
+  --gradient-cta: linear-gradient(135deg, #e94b2e 0%, #f59a2d 100%);
+  --gradient-text: linear-gradient(135deg, #e94b2e 0%, #f59a2d 100%);
+  --shadow-glow-coral:
+    0 18px 40px -12px rgba(233, 75, 46, 0.45),
+    0 6px 16px -6px rgba(245, 154, 45, 0.35);
+  --shadow-soft:
+    0 1px 2px rgba(0, 67, 105, 0.04),
+    0 6px 16px -8px rgba(0, 67, 105, 0.10),
+    0 20px 40px -20px rgba(0, 67, 105, 0.12);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--brand-deep);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    color: var(--brand-deep);
+  }
+
+  [id] {
+    scroll-margin-top: 88px;
+  }
+}
+
+@utility text-gradient-cta {
+  background-image: var(--gradient-text);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+@utility bg-gradient-cta {
+  background-image: var(--gradient-cta);
+}
+
+@utility shadow-glow-coral {
+  box-shadow: var(--shadow-glow-coral);
+}
+
+@utility shadow-soft {
+  box-shadow: var(--shadow-soft);
+}
+
+/* ============================================================
+   Scroll reveal utilities — paired with `useReveal` hook.
+   Apply via `data-reveal` and optional `data-reveal-variant`,
+   `data-reveal-delay="120"` (ms).
+   ============================================================ */
+
+:root {
+  --ease-brand: cubic-bezier(0.22, 1, 0.36, 1);
+  --reveal-duration: 800ms;
+}
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity var(--reveal-duration) var(--ease-brand),
+    transform var(--reveal-duration) var(--ease-brand),
+    clip-path var(--reveal-duration) var(--ease-brand);
+  will-change: opacity, transform;
+}
+
+[data-reveal="fade"] {
+  transform: none;
+}
+
+[data-reveal="up"] {
+  transform: translateY(32px);
+}
+
+[data-reveal="up-sm"] {
+  transform: translateY(16px);
+}
+
+[data-reveal="left"] {
+  transform: translateX(-32px);
+}
+
+[data-reveal="right"] {
+  transform: translateX(32px);
+}
+
+[data-reveal="scale"] {
+  transform: scale(0.96);
+}
+
+[data-reveal="clip"] {
+  clip-path: inset(0 0 100% 0);
+  transform: translateY(24px);
+}
+
+[data-reveal][data-revealed="true"] {
+  opacity: 1;
+  transform: none;
+  clip-path: inset(0 0 0 0);
+}
+
+/* ============================================================
+   Ambient drift — slow loops for decorative background blobs.
+   ============================================================ */
+
+@keyframes ambient-drift-1 {
+  0%   { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(20px, -15px, 0); }
+}
+
+@keyframes ambient-drift-2 {
+  0%   { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-18px, 12px, 0); }
+}
+
+@utility animate-ambient-1 {
+  animation: ambient-drift-1 22s ease-in-out infinite alternate;
+}
+
+@utility animate-ambient-2 {
+  animation: ambient-drift-2 26s ease-in-out infinite alternate;
+}
+
+/* Marquee */
+@keyframes marquee-left {
+  0%   { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+@keyframes marquee-right {
+  0%   { transform: translate3d(-50%, 0, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+  }
+}
